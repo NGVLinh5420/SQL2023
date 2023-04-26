@@ -52,6 +52,85 @@ DROP INDEX- xóa một chỉ mục<br>
 ```DELETE TABLE "tên Table"```
 <br>
 
+## Ràng Buộc CONSTRAINT
+
+**- Các Ràng Buộc nên được đặt Tên**
+
+* __NOT NULL__ - Đảm bảo rằng cột đó không được để trống giá trị.
+
+* __UNIQUE__ - Đảm bảo rằng tất cả các giá trị trong mọi hàng ở cùng một cột là khác nhau (VD: Số CCCD).
+
+* __PRIMARY KEY__ - Một sự kết hợp của một NOT NULL và UNIQUE. Xác định duy nhất mỗi hàng trong một bảng.
+
+* __FOREIGN KEY__ - Khoá Ngoại và Ngăn chặn các hành động phá hủy liên kết giữa các bảng.
+
+* __CHECK__ - Đảm bảo rằng các giá trị trong một cột thỏa mãn một điều kiện cụ thể.
+
+* __DEFAULT__ - Đặt giá trị mặc định cho một cột nếu không có giá trị nào được chỉ định.
+
+* __CREATE INDEX__ - Dùng để tạo và lấy dữ liệu từ cơ sở dữ liệu rất nhanh.
+
+**- Syntax có sự thay đổi ở 'Điều Kiện' theo mỗi loại Ràng Buộc**
+
+**- Trong Table:**
+
+     CREATE TABLE "Table" 
+     (
+        ID INT "Ràng Buộc" ('Điều Kiện', ...),
+        ...
+     )
+     
+     OR
+     
+     CREATE TABLE "Table" 
+     (
+        ID INT,
+        ...,
+        "Ràng Buộc" ( 'Điều Kiện', ...)
+     )
+     
+     OR
+     
+     CREATE TABLE "Table" 
+     (
+        ID INT,
+        CONSTRAINT "CT_tên ràng buộc" "Ràng Buộc" ( 'Điều Kiện', ...)
+     )
+     
+**- Ngoài Table:**          
+     
+     ALTER TABLE "Table"
+     ADD "Ràng Buộc" ('Điều Kiện', ...)
+     
+     OR
+     
+     ALTER TABLE "Table"
+     ADD CONSTRAINT CT_"tên" "Ràng Buộc" ('Điều Kiện', ...)
+     
+     
+**khác biệt:**
+
+    //Dùng cho NOT NULL     
+    ALTER TABLE Persons
+    ALTER COLUMN Age int NOT NULL
+    
+    //Dùng cho DEFAULT
+    ALTER TABLE Persons
+    ADD CONSTRAINT df_City
+    DEFAULT 'Sandnes' FOR City
+
+**- DROP CONSTRAINT:**
+
+    ALTER TABLE "Table"
+    DROP CONSTRAINT "Tên ràng buộc"
+    
+    ALTER TABLE "Table"
+    ALTER COLUMN "Cột" DROP "Ràng Buộc"
+    //Dành cho các Ràng buộc không cần đặt tên: PK, NOT NULL, DEFAULT, 
+    
+
+<br>
+
 ## Tạo Khoá Chính PRIMARY KEY:
 
 **- Trong Table:**
@@ -67,17 +146,26 @@ DROP INDEX- xóa một chỉ mục<br>
         ...,
         PRIMARY KEY (ID, MaNV, MaSP, ...)
     )
+    
+    OR
+    
+    (
+        ...,
+        CONSTRAINT PK_"tên" PRIMARY KEY (Column, ...)
+        
+    )
 
 **- Ngoài Table:**
 
-    ALTER TABLE "tên Table"
+    ALTER TABLE "Table"
     ADD PRIMARY KEY (ID, ...);
     
     OR
     
-    ALTER TABLE "tên Table"
-    ADD CONSTRAINT PK_"tên khoá" PRIMARY KEY (ID, ...)
+    ALTER TABLE "Table"
+    ADD CONSTRAINT PK_"tên khoá chính" PRIMARY KEY (ID, ...)
     //Đặt tên cho Khoá Chính khi cần thiết.
+
 
 ## Tạo Khoá Ngoại FOREIGN KEY
 
@@ -133,7 +221,7 @@ DROP INDEX- xóa một chỉ mục<br>
 
 * Đổi tên một cột     : `ALTER TABLE "Table" RENAME COLUMN "tên Cột" TO "tên Mới"` <br>
 
-* Thay đổi KDL một cột: `ALTER TABLE "Table" ALTER COLUMN "tên Cột" "KDL"` <br>
+* Sửa cột: `ALTER TABLE "Table" ALTER COLUMN "tên Cột" "KDL" "Ràng Buộc"` <br>
 
 <br>
 
@@ -152,7 +240,7 @@ __- Chèn tự động Tất Cả các Cột:__ *Có bao nhiêu Cột, có bấy
 __- Chỉ chèn vào một vài Cột:__
 
     INSERT INTO "Table" (ID1, ID3, ID12)
-    VALUES ( value1, value3, value12)
+    VALUES (value1, value3, value12)
     
 <br>
 
@@ -161,7 +249,7 @@ __- Chỉ chèn vào một vài Cột:__
 __- Syntax:__
 
     UPDATE "Table"
-    SET Column2 = value2, Column3 = value3, ...
+    SET "Column2 = value2", "Column3 = value3", ...
     WHERE "Column1 = value1"
     
     //Chỉ cập nhật Cột 2-3 tại Hàng có Cột 1 = Value1.
@@ -171,13 +259,13 @@ __- Syntax:__
 **- AND: Các điều kiện nên khác Cột với nhau.**
 
     UPDATE "Table"
-    SET Column2 = value2, Column3 = value3, ...
+    SET "Column2 = value2", "Column3 = value3", ...
     WHERE "Column1 = value1" AND "Column2 = value2"
 
 **- OR: Các điều kiện có thể cùng Cột với nhau.**
 
     UPDATE "Table"
-    SET Column2 = value2, Column3 = value3, ...
+    SET "Column2 = value2", "Column3 = value3", ...
     WHERE "Column1 = value1-2" OR "Column1 = value1-5"
 
 **- NOT: Ngoại Trừ**
@@ -190,34 +278,39 @@ __- Syntax:__
 
 <br>
 
-## Ràng Buộc CONSTRAINT
+## Liệt Kê - SELECT
 
-* __NOT NULL__ - Đảm bảo rằng cột đó không được để trống giá trị.
+**- Syntax:**
 
-* __UNIQUE__ - Đảm bảo rằng tất cả các giá trị trong mọi hàng ở cùng một cột là khác nhau (VD: Số CCCD).
+    SELECT "column1", "column2", ...
+    FROM "Table"  
 
-* __PRIMARY KEY__ - Một sự kết hợp của một NOT NULL và UNIQUE. Xác định duy nhất mỗi hàng trong một bảng.
+**- Liệt kê tất cả các Cột:**
 
-* __FOREIGN KEY__ - Khoá Ngoại và Ngăn chặn các hành động phá hủy liên kết giữa các bảng.
+    SELECT * FROM "Table"
 
-* __CHECK__ - Đảm bảo rằng các giá trị trong một cột thỏa mãn một điều kiện cụ thể.
+**- Liệt kê theo Loại:** Dữ liệu lệt kê ra Không Trùng Nhau.
 
-* __DEFAULT__ - Đặt giá trị mặc định cho một cột nếu không có giá trị nào được chỉ định.
+   SELECT DISTINCT "column1", "column2", ...
+   FROM "Table"
 
-* __CREATE INDEX__ - Dùng để tạo và lấy dữ liệu từ cơ sở dữ liệu rất nhanh.
-<br> 
+## Sắp Xếp Theo Thứ Tự - ORDER BY:
 
-    CREATE TABLE "Table" 
-    (
-        "COLUMN1" "DATATYPE" "CONSTRAINT",
-        "COLUMN2" "DATATYPE" "CONSTRAINT",
-        "COLUMN3" "DATATYPE" "CONSTRAINT",
-        ...
-     )
+**Mặc định là tăng dần (ASC)**
+**DESC là giảm dần**
 
-<br>
+**- Syntax:**
 
-## 
+    SELECT column1, column2, ...
+    FROM "Table"
+    ORDER BY column1, column2, ... ASC|DESC
+
+**- Sắp xếp Table theo Thứ tự của Cột:**
+
+    SELECT * FROM Customers
+    ORDER BY Column1, Column2 DESC, Column3 ASC, ....
+    //Mặc định tăng dần.
+
 
 ## 
 
