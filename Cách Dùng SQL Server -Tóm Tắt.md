@@ -38,12 +38,18 @@ DROP INDEX- xóa một chỉ mục<br>
 >...
 >
 
-## Tạo DATABASE: `CREATE DATABASE "tên DataBase"`
-`DELETE DATABASE "tên DataBase"`
+## Tạo DATABASE:
+
+```CREATE DATABASE "tên DataBase"```
+
+```DELETE DATABASE "tên DataBase"```
 <br>
 
-## Tạo TABLE: `CREATE TABLE "tên Table" ( "BiếnA, BiếnB" )`
-`DELETE TABLE "tên Table"`
+## Tạo TABLE:
+
+```CREATE TABLE "tên Table" ( "BiếnA, BiếnB" )```
+
+```DELETE TABLE "tên Table"```
 <br>
 
 ## Tạo Khoá Chính PRIMARY KEY:
