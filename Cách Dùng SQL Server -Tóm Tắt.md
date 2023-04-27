@@ -278,7 +278,7 @@ __- Syntax:__
 
 <br>
 
-## Liệt Kê - SELECT
+## Liệt Kê và Toán Tử - SELECT
 
 **- Syntax:**
 
@@ -295,6 +295,13 @@ __- Syntax:__
 
     SELECT DISTINCT "column1", "column2", ...
     FROM "Table"
+
+**- Toá Tử:**
+
+* LIKE
+* IS
+* KHÁC <>
+* 
 
 ## Sắp Xếp Theo Thứ Tự - ORDER BY:
 
