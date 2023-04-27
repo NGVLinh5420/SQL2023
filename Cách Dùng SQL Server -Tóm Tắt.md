@@ -285,9 +285,11 @@ __- Syntax:__
     SELECT "column1", "column2", ...
     FROM "Table"  
 
-**- Liệt kê tất cả các Cột:**
+**- Liệt kê tất cả các Cột:** Có thể kèm theo ĐK
 
     SELECT * FROM "Table"
+    WHERE "điều kiện" 
+
 
 **- Liệt kê theo Loại:** Dữ liệu lệt kê ra Không Trùng Nhau.
 
