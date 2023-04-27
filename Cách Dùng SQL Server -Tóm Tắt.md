@@ -301,7 +301,7 @@ __- Syntax:__
 * LIKE
 * IS
 * KHÁC <>
-* 
+* TOP - ORDER BY
 
 ## Sắp Xếp Theo Thứ Tự - ORDER BY:
 
