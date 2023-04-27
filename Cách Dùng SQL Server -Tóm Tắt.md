@@ -293,6 +293,7 @@ __- Syntax:__
 
 **- Liệt kê theo Loại:** Dữ liệu lệt kê ra Không Trùng Nhau.
 
+
    SELECT DISTINCT "column1", "column2", ...
    FROM "Table"
 
