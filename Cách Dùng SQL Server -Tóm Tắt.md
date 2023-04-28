@@ -35,18 +35,24 @@ DROP INDEX- xóa một chỉ mục<br>
 >
 
 ## Tạo DATABASE:
-
 ```SQL
 CREATE DATABASE NAME
+
 DROP DATABASE NAME
 ```
 <br>
 
 ## Tạo TABLE:
 
-```CREATE TABLE "tên Table" ( "BiếnA, BiếnB" )```
+```SQL
+CREATE TABLE NAME
+(
+   ID NVARCHAR(10),
+   COUNT INT
+)
 
-```DELETE TABLE "tên Table"```
+DROP TABLE NAME
+```
 <br>
 
 ## Ràng Buộc CONSTRAINT
@@ -74,28 +80,30 @@ DROP DATABASE NAME
 
 **- Trong Table:**
 
-     CREATE TABLE "Table" 
+```SQL
+     CREATE TABLE NAME 
      (
-        ID INT "Ràng Buộc" ('Điều Kiện', ...),
+        ID INT "Ràng Buộc" (...),
         ...
      )
      
      OR
      
-     CREATE TABLE "Table" 
+     CREATE TABLE NAME 
      (
         ID INT,
         ...,
-        "Ràng Buộc" ( 'Điều Kiện', ...)
+        "Ràng Buộc" (ID, ...) ...
      )
      
      OR
      
-     CREATE TABLE "Table" 
+     CREATE TABLE NAME 
      (
         ID INT,
-        CONSTRAINT "Tên Ràng Buộc" "Loại-Ràng-Buộc" ( 'Điều Kiện', ...)
+        CONSTRAINT "Tên Ràng Buộc" "Loại-Ràng-Buộc" (ID, ...) ...
      )
+```
      
 **- Ngoài Table:**          
      
