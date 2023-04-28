@@ -72,6 +72,9 @@ DROP INDEX- xóa một chỉ mục<br>
 
 **- Syntax có sự thay đổi ở 'Điều Kiện' theo mỗi loại Ràng Buộc**
 
+* __"Tên Ràng Buộc"__ : Là đặt tên cho Chức Năng mà ràng buộc đó Thực Hiện
+* __"Loại-Ràng-Buộc"__ : UNIQUE, DEFAULT, ...
+
 **- Trong Table:**
 
      CREATE TABLE "Table" 
@@ -94,21 +97,21 @@ DROP INDEX- xóa một chỉ mục<br>
      CREATE TABLE "Table" 
      (
         ID INT,
-        CONSTRAINT "CT_tên ràng buộc" "Ràng Buộc" ( 'Điều Kiện', ...)
+        CONSTRAINT "Tên Ràng Buộc" "Loại-Ràng-Buộc" ( 'Điều Kiện', ...)
      )
      
 **- Ngoài Table:**          
      
      ALTER TABLE "Table"
-     ADD "Ràng Buộc" ('Điều Kiện', ...)
+     ADD "Loại-Ràng-Buộc" ('Điều Kiện', ...)
      
      OR
      
      ALTER TABLE "Table"
-     ADD CONSTRAINT CT_"tên" "Ràng Buộc" ('Điều Kiện', ...)
+     ADD CONSTRAINT "Tên Ràng Buộc" "Loại-Ràng-Buộc" ('Điều Kiện', ...)
      
      
-**khác biệt:**
+**Cách Khác:**
 
     //Dùng cho NOT NULL     
     ALTER TABLE Persons
@@ -122,10 +125,10 @@ DROP INDEX- xóa một chỉ mục<br>
 **- DROP CONSTRAINT:**
 
     ALTER TABLE "Table"
-    DROP CONSTRAINT "Tên ràng buộc"
+    DROP CONSTRAINT "Tên Ràng Buộc"
     
     ALTER TABLE "Table"
-    ALTER COLUMN "Cột" DROP "Ràng Buộc"
+    ALTER COLUMN "Cột" DROP "Loại-Ràng-Buộc"
     //Dành cho các Ràng buộc không cần đặt tên: PK, NOT NULL, DEFAULT, 
     
 
