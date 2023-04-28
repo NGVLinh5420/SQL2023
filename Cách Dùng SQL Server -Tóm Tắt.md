@@ -1,9 +1,5 @@
 # SQL SERVER
 
-   * Trích dẫn viết: `CREATE DATABASE "tên DataBase"`
-   
-   * Thực tế viết: `CREATE DATABASE QUANLYBDS`
-
 **- CÚ PHÁP SQL ĐỀU VIẾT HOA.**
 
 **- KHÔNG CẦN DẤU ";" KHI KẾT SINTAX.**
@@ -40,9 +36,10 @@ DROP INDEX- xóa một chỉ mục<br>
 
 ## Tạo DATABASE:
 
-```CREATE DATABASE "tên DataBase"```
-
-```DELETE DATABASE "tên DataBase"```
+```SQL
+CREATE DATABASE NAME
+DROP DATABASE NAME
+```
 <br>
 
 ## Tạo TABLE:
