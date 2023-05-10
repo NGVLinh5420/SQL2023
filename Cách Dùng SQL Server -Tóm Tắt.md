@@ -44,6 +44,7 @@ DROP TABLE NHANVIEN;
 * __CREATE INDEX__ - Dùng để tạo và lấy dữ liệu từ cơ sở dữ liệu rất nhanh.
 
 * __CÁCH THÊM RÀNG BUỘC:__
+
 **- Trong Table:**
 ```SQL
      CREATE TABLE NHANVIEN 
