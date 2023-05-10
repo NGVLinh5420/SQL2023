@@ -281,15 +281,18 @@ __- Syntax:__
 ## Liệt Kê và Toán Tử - SELECT
 
 **- Syntax:**
-
-    SELECT "column1", "column2", ...
-    FROM "Table"  
+```SQL
+    SELECT NV.ID, NV.Ten, P.ChucVu
+    FROM NHANVIEN NV, PHONG P
+    WHERE NV.ID=P.ID
+```
 
 **- Liệt kê tất cả các Cột:** Có thể kèm theo ĐK
-
-    SELECT * FROM "Table"
-    WHERE "điều kiện" 
-
+```SQL
+    SELECT * 
+    FROM NHANVIEN
+    WHERE ID>1
+```
 
 **- Liệt kê theo Loại:** Dữ liệu lệt kê ra Không Trùng Nhau.
 
