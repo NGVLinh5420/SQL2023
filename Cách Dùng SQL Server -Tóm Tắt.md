@@ -1,237 +1,229 @@
-# SQL SERVER
-
-**- CÚ PHÁP SQL ĐỀU VIẾT HOA.**
-
-**- KHÔNG CẦN DẤU ";" KHI KẾT SINTAX.**
-
-**- TÊN BIẾN VIẾT THEO CHUẨN _UpperCase_.**
-
-**- BIẾN hay còn được gọi là CỘT - COLUMN trong TABLE**
-
-**- CÁC BIẾN SẼ LÀ KHOÁ CHÍNH(PK) VÀ KHOÁ PHỤ(FR) PHẢI LÀ _NOT NULL_.**
-
-**- .**
-
-<br>
-
 ## Các Cú Pháp - Syntax Cơ Bản
-
->
->...<br>
-CREATE DATABASE - tạo một cơ sở dữ liệu mới<br>
-CREATE TABLE - tạo một bảng mới<br><br>
-ALTER DATABASE - sửa đổi một cơ sở dữ liệu<br>
-ALTER TABLE - được sử dụng để thêm, xóa hoặc sửa đổi các cột; thêm và loại bỏ các ràng buộc trong Table.<br><br>
-DELETE- xóa dữ liệu khỏi cơ sở dữ liệu<br>
-DROP TABLE- xóa một bảng <br><br>
-INSERT INTO - chèn dữ liệu mới vào cơ sở dữ liệu<br>
-UPDATE - cập nhật dữ liệu trong cơ sở dữ liệu<br>
-SELECT - Liệt kê dữ liệu từ cơ sở dữ liệu <br>
-SELECT DISTINCT - Liệt kê ra các Loại của Dữ Liệu: <br>
-WHERE - Sử dụng để trích xuất những dữ liệu đáp ứng điều kiện cụ thể.<br><br>
-CREATE INDEX- tạo một chỉ mục (khóa tìm kiếm)<br>
-DROP INDEX- xóa một chỉ mục<br>
->...
->
-
-## Tạo DATABASE:
 ```SQL
-CREATE DATABASE NAME
-
-DROP DATABASE NAME
+CREATE DATABASE - tạo một cơ sở dữ liệu mới.
+CREATE TABLE - tạo một bảng mới.
+ALTER DATABASE - sửa đổi một cơ sở dữ liệu.
+ALTER TABLE - được sử dụng để thêm, xóa hoặc sửa đổi các cột; thêm và loại bỏ các ràng buộc trong Table.
+DELETE - xóa dữ liệu khỏi cơ sở dữ liệu.
+DROP TABLE - xóa một bảng.
+INSERT INTO - chèn dữ liệu mới vào cơ sở dữ liệu.
+UPDATE - Cập nhật dữ liệu trong cơ sở dữ liệu.
+SELECT - Liệt kê dữ liệu từ cơ sở dữ liệu.
+SELECT DISTINCT - Liệt kê ra các Loại của Dữ Liệu.
+WHERE - Sử dụng để trích xuất những dữ liệu đáp ứng điều kiện cụ thể.
+CREATE INDEX - tạo một chỉ mục (khóa tìm kiếm).
+DROP INDEX- xóa một chỉ mục.
 ```
-<br>
 
-## Tạo TABLE:
+## TẠO-XOÁ DATABASE:
+```SQL
+CREATE DATABASE NHANSU;
+
+DROP DATABASE NHANSU;
+```
+## TẠO-XOÁ TABLE:
 
 ```SQL
-CREATE TABLE NAME
+CREATE TABLE NHANVIEN
 (
-   ID NVARCHAR(10),
+   ID VARCHAR(10),
    COUNT INT
 )
 
-DROP TABLE NAME
+DROP TABLE NHANVIEN;
 ```
-<br>
 
-## Ràng Buộc CONSTRAINT
-
-**- Các Ràng Buộc nên được đặt Tên**
+## RÀNG BUỘC CONSTRAINT
 
 * __NOT NULL__ - Đảm bảo rằng cột đó không được để trống giá trị.
-
-* __UNIQUE__ - Đảm bảo rằng tất cả các giá trị trong mọi hàng ở cùng một cột là khác nhau (VD: Số CCCD).
-
 * __PRIMARY KEY__ - Một sự kết hợp của một NOT NULL và UNIQUE. Xác định duy nhất mỗi hàng trong một bảng.
-
 * __FOREIGN KEY__ - Khoá Ngoại và Ngăn chặn các hành động phá hủy liên kết giữa các bảng.
-
+* __UNIQUE__ - Đảm bảo rằng tất cả các giá trị trong mọi hàng ở cùng một cột là khác nhau (VD: Số CCCD).
 * __CHECK__ - Đảm bảo rằng các giá trị trong một cột thỏa mãn một điều kiện cụ thể.
-
 * __DEFAULT__ - Đặt giá trị mặc định cho một cột nếu không có giá trị nào được chỉ định.
-
 * __CREATE INDEX__ - Dùng để tạo và lấy dữ liệu từ cơ sở dữ liệu rất nhanh.
 
-**- Syntax có sự thay đổi ở 'Điều Kiện' theo mỗi loại Ràng Buộc**
-
-* __"Tên Ràng Buộc"__ : Là đặt tên cho Chức Năng mà ràng buộc đó Thực Hiện
-* __"Loại-Ràng-Buộc"__ : UNIQUE, DEFAULT, ...
-
+* __CÁCH THÊM RÀNG BUỘC:__
 **- Trong Table:**
-
 ```SQL
-     CREATE TABLE NAME 
+     CREATE TABLE NHANVIEN 
      (
-        ID INT "Ràng Buộc" (...),
-        ...
+        ID INT NOT NULL,
+        Ten VARCHAR(50) UNIQUE,
+        Tuoi int CHECK (Age>18),
+        QuocTich VARCHAR(50) DEFAULT 'VietNam'
      )
      
-     OR
+     Hoặc
      
-     CREATE TABLE NAME 
+     CREATE TABLE NHANVIEN 
      (
-        ID INT,
-        ...,
-        "Ràng Buộc" (ID, ...) ...
+        ID INT NOT NULL,
+        Ten VARCHAR(50),
+        Tuoi int,
+        QuocTich VARCHAR(50),
+        
+        UNIQUE (Ten),
+        CHECK (Tuoi>18 AND Tuoi<40),
+        --Không hỗ trợ DEFAULT.
      )
      
-     OR
+     Nên
      
-     CREATE TABLE NAME 
+     CREATE TABLE NHANVIEN 
      (
-        ID INT,
-        CONSTRAINT "Tên Ràng Buộc" "Loại-Ràng-Buộc" (ID, ...) ...
+        ID INT NOT NULL,
+        Ten VARCHAR(50),
+        Tuoi INT,
+        QuocTich VARCHAR(50),
+        
+        CONSTRAINT UQ_NHANVIEN UNIQUE (ID,Ten),
+        CONSTRAINT CK_NHANVIEN_Tuoi CHECK (Tuoi>18 AND Tuoi<40)
+        --Không hỗ trợ DEFAULT.
      )
 ```
      
 **- Ngoài Table:**          
+```SQL
+     ALTER TABLE NHANVIEN
+     ALTER COLUMN Age int NOT NULL;
+     go
      
-     ALTER TABLE "Table"
-     ADD "Loại-Ràng-Buộc" ('Điều Kiện', ...)
+     ALTER TABLE NHANVIEN
+     ADD CONSTRAINT UQ_NHANVIEN UNIQUE (ID,Ten)
+     go
      
-     OR
+     ALTER TABLE NHANVIEN
+     ADD CONSTRAINT CK_NHANVIEN CHECK (Age>=18 AND Ten='Sandnes')
+     go
      
-     ALTER TABLE "Table"
-     ADD CONSTRAINT "Tên Ràng Buộc" "Loại-Ràng-Buộc" ('Điều Kiện', ...)
-     
-     
-**Cách Khác:**
+     ALTER TABLE NHANVIEN
+     ADD CONSTRAINT DF_NHANVIEN_QuocTich
+     DEFAULT 'Sandnes' FOR QuocTich;
+     go
+```
 
-    //Dùng cho NOT NULL     
-    ALTER TABLE Persons
-    ALTER COLUMN Age int NOT NULL
+**- XOÁ CONSTRAINT:**
+```SQL
+    --Cách Xoá NOT NULL
+    ALTER TABLE NHANVIEN
+    ALTER COLUMN Age int NULL
+    go
     
-    //Dùng cho DEFAULT
-    ALTER TABLE Persons
-    ADD CONSTRAINT df_City
-    DEFAULT 'Sandnes' FOR City
-
-**- DROP CONSTRAINT:**
-
-    ALTER TABLE "Table"
-    DROP CONSTRAINT "Tên Ràng Buộc"
+    --Dành cho các Ràng buộc có đặt tên.
+    ALTER TABLE NHANVIEN
+    DROP CONSTRAINT [Tên Ràng Buộc: CK_NHANVIEN_Tuoi]
     
-    ALTER TABLE "Table"
-    ALTER COLUMN "Cột" DROP "Loại-Ràng-Buộc"
-    //Dành cho các Ràng buộc không cần đặt tên: PK, NOT NULL, DEFAULT, 
     
+```  
 
-<br>
+## KHOÁ CHÍNH PRIMARY KEY:
 
-## Tạo Khoá Chính PRIMARY KEY:
+--Phải đặt tên cho Khoá Chính, tương lại Sửa-Xoá dễ dàng hơn.
 
 **- Trong Table:**
-
+```SQL
     (
-        MaNV NVARCHAR(10) NOT NULL PRIMARY KEY,
-        ...
+        ID NVARCHAR(10) NOT NULL PRIMARY KEY
     )
     
-    OR
+    Hoặc
     
     (
         ...,
         PRIMARY KEY (ID, MaNV, MaSP, ...)
     )
     
-    OR
+    Nên
     
     (
         ...,
-        CONSTRAINT PK_"tên" PRIMARY KEY (Column, ...)
-        
+        CONSTRAINT PK_NHANVIEN_ID PRIMARY KEY (ID, MaNV, MaSP, ...)
     )
+```
 
 **- Ngoài Table:**
-
-    ALTER TABLE "Table"
-    ADD PRIMARY KEY (ID, ...);
+```SQL
+    ALTER TABLE NHANVIEN
+    ADD PRIMARY KEY (ID);
     
-    OR
+    Hoặc
     
-    ALTER TABLE "Table"
-    ADD CONSTRAINT PK_"tên khoá chính" PRIMARY KEY (ID, ...)
-    //Đặt tên cho Khoá Chính khi cần thiết.
+    ALTER TABLE NHANVIEN
+    ADD CONSTRAINT PK_ID PRIMARY KEY (ID)
+```
+**- Xoá Khoá Chính:**
+```SQL
+   ALTER TABLE NHANVIEN
+   DROP CONSTRAINT PK_ID
+   go
+```
 
+## TẠO KHOÁ NGOẠI FOREIGN KEY
 
-## Tạo Khoá Ngoại FOREIGN KEY
-
-* __Syntax:__ `FOREIGN KEY REFERENCES "Table"("Biến")`
-* __REFERENCES:__ Tham chiếu đến Table có Biến-Là Khoá Chính của Table đó.
-* __Nên đặt tên cho Khoá Phụ "FK_'tên' ".__
-* __Một Table có thể tự tạo Khoá Phụ cho chính Nó.__
-* __Biến đặt làm Khoá Phụ ở hai "Table" nên đặt cùng *Tên*, *Kiểu Dữ Liệu*, *Kích Thước Kiểu Dữ Liệu* và *NOT NULL*__
+* __Biến đặt làm Khoá Phụ, ở hai "Table" nên đặt cùng *Tên*, *Kiểu Dữ Liệu*, *Kích Thước Kiểu Dữ Liệu* và có sẵn *NOT NULL*__
 
 **- Trong Table:**
-
+```SQL
     (
-        ID int FOREIGN KEY REFERENCES "Table"(ID),
-        ...
+        ID int FOREIGN KEY REFERENCES PHONG(ID)
     )
     
-    OR
-    
-    (
-        ...,
-        FOREIGN KEY (ID, ...) REFERENCES "Table"(ID, ...)
-    )
-    
-    OR
+    Hoặc
     
     (
         ...,
-        CONSTRAINT "FK_tên khoá phụ" FOREIGN KEY (ID, ...) REFERENCES "Table"(ID, ...)
-        //Nên đặt tên cho Khoá Ngoại.
-        
+        FOREIGN KEY (ID) REFERENCES NHANVIEN(ID)
     )
+    
+    Hoặc
+    
+    (
+        ...,
+        CONSTRAINT FK_TÊN FOREIGN KEY (ID) REFERENCES NHANVIEN(ID)
+        --Phải đặt tên cho Khoá Ngoại.
+    )
+```
 
 **- Ngoài Table:** 
-
-    ALTER TABLE "Table_1"
-    ADD FOREIGN KEY (ID, ...) REFERENCES "Table2"(ID, ...);
+```SQL
+    ALTER TABLE NHANVIEN
+    ADD FOREIGN KEY (MaPH) REFERENCES PHONG(MaPH)
+    go
     
-    OR
+    Hoặc
     
-    ALTER TABLE "Table_1"
-    ADD CONSTRAINT "FK_tên Khoá Phụ" FOREIGN KEY (ID, ...) REFERENCES "Table_2"(ID, ...)
-    //Nên đặt tên cho Khoá Ngoại.
+    ALTER TABLE NHANVIEN
+    ADD CONSTRAINT FK_MaPH FOREIGN KEY (MaPH) REFERENCES PHONG(MaPH)
+    go
+```
+**- Xoá Khoá Ngoại:** 
+```SQL
+ALTER TABLE NHANVIEN DROP CONSTRAINT FK_MaPH
+go
+```
 
-**- Xoá FK:** `ALTER TABLE "Table" DROP CONSTRAINT "Tên Khoá Phụ"`
+## SỬA TABLE - ALTER TABLE
 
-<br>
+* __Thêm Cột:__ 
+```SQL
+ALTER TABLE NHANVIEN ADD NamSinh DATETIME
+```
 
-## Sửa TABLE - ALTER TABLE
+* __Xóa Cột:__ 
+```SQL
+ALTER TABLE NHANVIEN DROP COLUMN NamSinh
+```
 
-* Thêm một cột (Biến)  : `ALTER TABLE "Table" ADD "tên Cột" "Kiểu Dữ Liệu"` <br>
+* __Đổi Tên Cột:__
+```SQL
+ALTER TABLE NHANVIEN RENAME COLUMN NamSinh to NgaySinh
+```
 
-* Xóa một cột         : `ALTER TABLE "Table" DROP COLUMN "tên Cột"`<br>
-
-* Đổi tên một cột     : `ALTER TABLE "Table" RENAME COLUMN "tên Cột" TO "tên Mới"` <br>
-
-* Sửa cột: `ALTER TABLE "Table" ALTER COLUMN "tên Cột" "KDL" "Ràng Buộc"` <br>
-
-<br>
+* __Sửa KDL Cột:__ 
+```SQL
+ALTER TABLE NHANVIEN ALTER COLUMN NgaySinh VARCHAR(50)
+```
 
 ## Chèn Dữ Liệu Vào TABLE - INSERT INTO
 
@@ -250,7 +242,6 @@ __- Chỉ chèn vào một vài Cột:__
     INSERT INTO "Table" (ID1, ID3, ID12)
     VALUES (value1, value3, value12)
     
-<br>
 
 ## Cập Nhật Dữ Liệu Cho TABLE - UPDATE/ WHERE/ AND-OR-NOT
 
@@ -306,9 +297,9 @@ __- Syntax:__
 
 **- Toá Tử:**
 
-* LIKE
+* LIKE GIỐNG =
 * IS
-* KHÁC <>
+* <> KHÁC
 * TOP - ORDER BY
 
 ## Sắp Xếp Theo Thứ Tự - ORDER BY:
@@ -329,9 +320,6 @@ __- Syntax:__
     //Mặc định tăng dần.
 
 
-## 
-
-## 
 
 
 
