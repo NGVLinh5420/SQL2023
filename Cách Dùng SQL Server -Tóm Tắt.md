@@ -19,6 +19,7 @@ DROP INDEX- xóa một chỉ mục.
 ```SQL
 CREATE DATABASE NHANSU;
 
+--
 DROP DATABASE NHANSU;
 ```
 ## TẠO-XOÁ TABLE:
