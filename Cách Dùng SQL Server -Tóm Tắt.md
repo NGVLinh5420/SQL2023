@@ -64,7 +64,6 @@ DROP TABLE NHANVIEN;
         Ten VARCHAR(50),
         Tuoi int,
         QuocTich VARCHAR(50),
-        
         UNIQUE (Ten),
         CHECK (Tuoi>18 AND Tuoi<40),
         --Không hỗ trợ DEFAULT.
